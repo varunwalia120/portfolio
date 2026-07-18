@@ -29,8 +29,9 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
+      whileHover={{ y: -4 }}
       transition={{ delay: index * 0.08 }}
-      className="group flex flex-col rounded-lg border border-border bg-card p-6 transition-colors hover:border-accent/50"
+      className="group flex flex-col rounded-lg border border-border bg-card p-6 transition-shadow duration-300 hover:border-accent/50 hover:shadow-[0_0_24px_-6px_hsl(var(--accent)/0.35)]"
     >
       <div className="mb-4 flex items-center justify-between">
         <h3 className="text-lg font-bold">{project.title}</h3>
