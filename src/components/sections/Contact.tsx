@@ -4,6 +4,7 @@ import { useState, FormEvent } from "react";
 import { motion } from "framer-motion";
 import emailjs from "@emailjs/browser";
 import { Mail, Loader2, CheckCircle2 } from "lucide-react";
+import { Magnetic } from "@/components/ui/Magnetic";
 
 type Status = "idle" | "sending" | "success" | "error";
 
@@ -43,6 +44,9 @@ export function Contact() {
     if (Object.keys(validationErrors).length > 0) return;
 
     setStatus("sending");
+    console.log("Service ID:", process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID);
+    console.log("Template ID:", process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID);
+    console.log("Public Key:", process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY);
     try {
       await emailjs.sendForm(
         process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
@@ -177,23 +181,25 @@ export function Contact() {
             </p>
           )}
 
-          <button
-            type="submit"
-            disabled={status === "sending"}
-            className="flex w-full items-center justify-center gap-2 rounded-lg bg-accent px-6 py-3 font-medium text-accent-foreground transition-opacity hover:opacity-90 disabled:opacity-60"
-          >
-            {status === "sending" ? (
-              <>
-                <Loader2 className="animate-spin" size={18} />
-                Sending...
-              </>
-            ) : (
-              <>
-                <Mail size={18} />
-                Send Message
-              </>
-            )}
-          </button>
+          <Magnetic>
+            <button
+              type="submit"
+              disabled={status === "sending"}
+              className="flex w-full items-center justify-center gap-2 rounded-lg bg-accent px-6 py-3 font-medium text-accent-foreground transition-opacity hover:opacity-90 disabled:opacity-60"
+            >
+              {status === "sending" ? (
+                <>
+                  <Loader2 className="animate-spin" size={18} />
+                  Sending...
+                </>
+              ) : (
+                <>
+                  <Mail size={18} />
+                  Send Message
+                </>
+              )}
+            </button>
+          </Magnetic>
         </motion.form>
       )}
     </section>
