@@ -2,62 +2,50 @@
 
 import { motion } from "framer-motion";
 import { skillCategories } from "@/data/skills";
+import { GlassCard } from "@/components/ui/GlassCard";
+import { GlassBadge } from "@/components/ui/GlassBadge";
+import { SectionTitle } from "@/components/ui/SectionTitle";
 
 export function Skills() {
   return (
-    <section id="skills" className="mx-auto max-w-5xl px-6 py-24">
-      <motion.p
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        className="mb-2 font-mono text-sm text-accent"
-      >
-        02 — Skills
-      </motion.p>
-      <motion.h2
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ delay: 0.1 }}
-        className="mb-12 text-3xl font-bold sm:text-4xl"
-      >
-        What I Work With
-      </motion.h2>
+    <section
+      id="skills"
+      className="section-container py-28"
+    >
+      <SectionTitle
+        number="02"
+        title="What I Work With"
+        subtitle="A collection of technologies, frameworks, and tools I use to build modern web applications and data-driven products."
+      />
 
-      <div className="grid gap-8 sm:grid-cols-2">
-        {skillCategories.map((category, catIndex) => (
+      <div className="grid gap-8 lg:grid-cols-2">
+        {skillCategories.map((category, index) => (
           <motion.div
             key={category.category}
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 35 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: catIndex * 0.05 }}
-            className="rounded-lg border border-border bg-card p-6"
+            transition={{
+              duration: 0.6,
+              delay: index * 0.08,
+            }}
           >
-            <h3 className="mb-4 font-mono text-sm text-muted-foreground">
-              {category.category}
-            </h3>
-            <div className="space-y-4">
-              {category.skills.map((skill) => (
-                <div key={skill.name}>
-                  <div className="mb-1.5 flex items-center justify-between text-sm">
-                    <span>{skill.name}</span>
-                    <span className="text-muted-foreground">
-                      {skill.proficiency}%
-                    </span>
-                  </div>
-                  <div className="h-1.5 w-full overflow-hidden rounded-full bg-secondary">
-                    <motion.div
-                      initial={{ width: 0 }}
-                      whileInView={{ width: `${skill.proficiency}%` }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.8, ease: "easeOut" }}
-                      className="h-full rounded-full bg-accent"
-                    />
-                  </div>
-                </div>
-              ))}
-            </div>
+            <GlassCard className="h-full p-8">
+              <h3 className="mb-6 text-xl font-bold">
+                {category.category}
+              </h3>
+
+              <div className="flex flex-wrap gap-3">
+                {category.skills.map((skill) => (
+                  <GlassBadge
+                    key={skill.name}
+                    className="hover:scale-105"
+                  >
+                    {skill.name}
+                  </GlassBadge>
+                ))}
+              </div>
+            </GlassCard>
           </motion.div>
         ))}
       </div>
