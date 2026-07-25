@@ -2,6 +2,9 @@
 
 import { motion } from "framer-motion";
 import { AnimatedCounter } from "@/components/ui/AnimatedCounter";
+import { GlassCard } from "@/components/ui/GlassCard";
+import { GlassBadge } from "@/components/ui/GlassBadge";
+import { SectionTitle } from "@/components/ui/SectionTitle";
 
 const stats = [
   { label: "Projects Shipped", value: 5, suffix: "" },
@@ -12,69 +15,76 @@ const stats = [
 
 export function About() {
   return (
-    <section id="about" className="mx-auto max-w-5xl px-6 py-24">
-      <motion.p
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        className="mb-2 font-mono text-sm text-accent"
-      >
-        01 — About
-      </motion.p>
-      <motion.h2
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, }}
-        transition={{ delay: 0.1 }}
-        className="mb-8 text-3xl font-bold sm:text-4xl"
-      >
-        Who I Am
-      </motion.h2>
+    <section
+      id="about"
+      className="section-container py-28"
+    >
+      <SectionTitle
+        number="01"
+        title="Who I Am"
+        subtitle="Building products at the intersection of full-stack development and data analytics."
+      />
 
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 35 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ delay: 0.2 }}
-        className="max-w-2xl space-y-4 text-muted-foreground"
+        transition={{ duration: 0.6 }}
       >
-        <p>
-          I&apos;m a third-year Information Technology student at Bharati
-          Vidyapeeth College of Engineering, GGSIPU, Delhi, building at the
-          intersection of full-stack development and data analytics.
-        </p>
-        <p>
-          I like taking projects end to end — from messy, malformed raw data
-          or a blank repo, through to a working, deployed product. My recent
-          work spans election data pipelines, public health dashboards, and
-          full-stack web applications, built on a stack of React, Next.js,
-          Node.js, Python, and SQL.
-        </p>
-        <p>
-          I&apos;m still exploring exactly where I&apos;ll specialize next,
-          but data-driven decision making is the thread running through
-          everything I build.
-        </p>
-      </motion.div>
+        <GlassCard className="p-8 md:p-12">
+          <div className="mb-8 flex flex-wrap gap-3">
+            <GlassBadge>Full Stack Developer</GlassBadge>
 
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ delay: 0.3 }}
-        className="mt-12 grid grid-cols-2 gap-6 sm:grid-cols-4"
-      >
-        {stats.map((stat) => (
-          <div
-            key={stat.label}
-            className="rounded-lg border border-border bg-card p-6 text-center"
-          >
-            <div className="text-3xl font-bold text-accent">
-              <AnimatedCounter value={stat.value} suffix={stat.suffix} />
-            </div>
-            <p className="mt-2 text-sm text-muted-foreground">{stat.label}</p>
+            <GlassBadge>Data Analyst</GlassBadge>
+
+            <GlassBadge>React</GlassBadge>
+
+            <GlassBadge>Next.js</GlassBadge>
+
+            <GlassBadge>Python</GlassBadge>
           </div>
-        ))}
+
+          <div className="max-w-3xl space-y-6 text-lg leading-9 text-muted-foreground">
+            <p>
+              I'm a third-year Information Technology student at Bharati
+              Vidyapeeth College of Engineering, GGSIPU, Delhi, building at
+              the intersection of full-stack development and data analytics.
+            </p>
+
+            <p>
+              I enjoy taking projects end-to-end—from messy raw data or a
+              blank repository to a polished, production-ready application.
+              My work spans election analytics, public health dashboards,
+              modern web applications, and scalable backend systems.
+            </p>
+
+            <p>
+              My long-term goal is to combine software engineering with data
+              science to build products that create measurable real-world
+              impact.
+            </p>
+          </div>
+
+          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {stats.map((stat) => (
+              <GlassCard
+                key={stat.label}
+                className="p-6 text-center"
+              >
+                <div className="text-4xl font-bold text-accent">
+                  <AnimatedCounter
+                    value={stat.value}
+                    suffix={stat.suffix}
+                  />
+                </div>
+
+                <p className="mt-3 text-sm text-muted-foreground">
+                  {stat.label}
+                </p>
+              </GlassCard>
+            ))}
+          </div>
+        </GlassCard>
       </motion.div>
     </section>
   );
