@@ -8,7 +8,7 @@ import { SectionTitle } from "@/components/ui/SectionTitle";
 
 const stats = [
   { label: "Projects Shipped", value: 5, suffix: "" },
-  { label: "LeetCode Solved", value: 50, suffix: "+" },
+  { label: "LeetCode Solved", value: 70, suffix: "+" },
   { label: "CGPA", value: 8.5, suffix: "" },
   { label: "NGOs Contributed To", value: 2, suffix: "" },
 ];
