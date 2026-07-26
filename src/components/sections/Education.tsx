@@ -186,7 +186,7 @@ export function Education() {
 
                   {/* Highlights */}
 
-                  {item.achievements.length > 0 && (
+                  {item.achievements?.length ? (
                     <div>
                       <h4
                         className="
@@ -202,7 +202,7 @@ export function Education() {
                       </h4>
 
                       <ul className="space-y-5">
-                        {item.achievements.map((achievement) => (
+                        {item.achievements?.map((achievement) => (
                           <li
                             key={achievement}
                             className="
@@ -230,7 +230,7 @@ export function Education() {
                         ))}
                       </ul>
                     </div>
-                  )}
+                  ): null}
                 </div>
               </div>
             </motion.div>
