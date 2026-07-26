@@ -24,20 +24,14 @@ export function ProjectCard({ project }: ProjectCardProps) {
 
   return (
     <motion.div
-      initial={{
-        opacity: 0,
-        y: 40,
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      whileHover={{
+        y: -8,
+        transition: { duration: 0.25 },
       }}
-      whileInView={{
-        opacity: 1,
-        y: 0,
-      }}
-      viewport={{
-        once: true,
-      }}
-      transition={{
-        duration: 0.6,
-      }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6 }}
     >
       <GlassCard className="overflow-hidden p-0">
         {/* Project Image */}
@@ -48,41 +42,23 @@ export function ProjectCard({ project }: ProjectCardProps) {
             alt={project.title}
             fill
             priority={project.featured}
-            className="
-              object-cover
-              transition-transform
-              duration-700
-              group-hover:scale-110
-            "
+            className="object-cover transition-transform duration-700 group-hover:scale-110"
           />
 
-          <div
-            className="
-              absolute
-              inset-0
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
 
-              bg-gradient-to-t
-              from-black/80
-              via-black/20
-              to-transparent
-            "
-          />
+          {/* Project Number */}
 
-          <div
-            className="
-              absolute
-              bottom-6
-              left-6
-              right-6
-            "
-          >
-            <h3
-              className="
-                text-3xl
-                font-bold
-                text-white
-              "
-            >
+          <div className="absolute left-6 top-6">
+            <span className="rounded-full border border-white/20 bg-black/40 px-3 py-1 text-xs font-semibold tracking-widest text-white backdrop-blur-md">
+              {String(project.id).padStart(2, "0")}
+            </span>
+          </div>
+
+          {/* Title */}
+
+          <div className="absolute bottom-6 left-6 right-6">
+            <h3 className="text-2xl font-bold text-white md:text-3xl">
               {project.title}
             </h3>
           </div>
@@ -91,12 +67,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
         {/* Content */}
 
         <div className="space-y-6 p-8">
-          <p
-            className="
-              leading-8
-              text-muted-foreground
-            "
-          >
+          <p className="line-clamp-4 leading-8 text-muted-foreground">
             {project.description}
           </p>
 
@@ -106,7 +77,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
             {project.techStack.map((tech) => (
               <GlassBadge
                 key={tech}
-                className="hover:scale-105"
+                className="transition-transform duration-200 hover:scale-105"
               >
                 {tech}
               </GlassBadge>
@@ -115,30 +86,13 @@ export function ProjectCard({ project }: ProjectCardProps) {
 
           {/* Action Buttons */}
 
-          <div className="flex flex-wrap gap-4">
+          <div className="flex flex-col gap-4 sm:flex-row">
             {project.githubUrl && (
               <Link
                 href={project.githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="
-                  inline-flex
-                  items-center
-                  gap-2
-
-                  rounded-xl
-
-                  border
-                  border-white/10
-
-                  px-5
-                  py-3
-
-                  transition-all
-
-                  hover:border-accent/40
-                  hover:bg-accent/10
-                "
+                className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/10 px-5 py-3 transition-all hover:border-accent/40 hover:bg-accent/10"
               >
                 <FolderGit size={18} />
                 GitHub
@@ -150,25 +104,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
                 href={project.liveUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="
-                  inline-flex
-                  items-center
-                  gap-2
-
-                  rounded-xl
-
-                  bg-accent
-
-                  px-5
-                  py-3
-
-                  font-medium
-                  text-accent-foreground
-
-                  transition-all
-
-                  hover:scale-105
-                "
+                className="inline-flex items-center justify-center gap-2 rounded-xl bg-accent px-5 py-3 font-medium text-accent-foreground transition-all hover:scale-105"
               >
                 <ExternalLink size={18} />
                 Live Demo
@@ -180,18 +116,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
 
           <button
             onClick={() => setExpanded(!expanded)}
-            className="
-              flex
-              items-center
-              gap-2
-
-              font-medium
-              text-accent
-
-              transition-colors
-
-              hover:text-accent/80
-            "
+            className="flex items-center gap-2 font-medium text-accent transition-colors hover:text-accent/80"
           >
             {expanded ? (
               <>
@@ -206,8 +131,8 @@ export function ProjectCard({ project }: ProjectCardProps) {
             )}
           </button>
 
-                    <AnimatePresence>
-            {expanded && (
+          <AnimatePresence>
+                        {expanded && (
               <motion.div
                 initial={{
                   opacity: 0,
@@ -223,17 +148,15 @@ export function ProjectCard({ project }: ProjectCardProps) {
                 }}
                 transition={{
                   duration: 0.35,
+                  ease: "easeInOut",
                 }}
                 className="
                   overflow-hidden
-
                   rounded-2xl
-
                   border
                   border-white/10
-
                   bg-white/5
-
+                  backdrop-blur-xl
                   p-6
                 "
               >
@@ -241,7 +164,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
                   {/* Problem Solved */}
 
                   <div>
-                    <h4 className="mb-3 text-lg font-semibold">
+                    <h4 className="mb-3 text-lg font-semibold text-foreground">
                       Problem Solved
                     </h4>
 
@@ -253,20 +176,26 @@ export function ProjectCard({ project }: ProjectCardProps) {
                   {/* Key Features */}
 
                   <div>
-                    <h4 className="mb-3 text-lg font-semibold">
+                    <h4 className="mb-3 text-lg font-semibold text-foreground">
                       Key Features
                     </h4>
 
-                    <ul className="space-y-3">
+                    <div className="grid gap-3 sm:grid-cols-2">
                       {project.keyFeatures.map((feature) => (
-                        <li
+                        <div
                           key={feature}
                           className="
                             flex
                             items-start
                             gap-3
-
-                            text-muted-foreground
+                            rounded-xl
+                            border
+                            border-white/10
+                            bg-white/5
+                            p-4
+                            transition-all
+                            hover:border-accent/30
+                            hover:bg-accent/5
                           "
                         >
                           <span
@@ -276,19 +205,22 @@ export function ProjectCard({ project }: ProjectCardProps) {
                               w-2
                               rounded-full
                               bg-accent
+                              shrink-0
                             "
                           />
 
-                          <span>{feature}</span>
-                        </li>
+                          <span className="text-sm leading-7 text-muted-foreground">
+                            {feature}
+                          </span>
+                        </div>
                       ))}
-                    </ul>
+                    </div>
                   </div>
 
                   {/* Challenges */}
 
                   <div>
-                    <h4 className="mb-3 text-lg font-semibold">
+                    <h4 className="mb-3 text-lg font-semibold text-foreground">
                       Challenges
                     </h4>
 

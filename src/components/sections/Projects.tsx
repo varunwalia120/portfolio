@@ -3,56 +3,71 @@
 import { motion } from "framer-motion";
 import { projects } from "@/data/projects";
 import { ProjectCard } from "@/components/sections/ProjectCard";
+import { SectionTitle } from "@/components/ui/SectionTitle";
 
 export function Projects() {
   const featured = projects.filter((p) => p.featured);
   const others = projects.filter((p) => !p.featured);
 
   return (
-    <section id="projects" className="mx-auto max-w-5xl px-6 py-24">
-      <motion.p
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        className="mb-2 font-mono text-sm text-accent"
-      >
-        03 — Projects
-      </motion.p>
-      <motion.h2
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ delay: 0.1 }}
-        className="mb-12 text-3xl font-bold sm:text-4xl"
-      >
-        What I Built
-      </motion.h2>
+    <section
+      id="projects"
+      className="relative mx-auto max-w-7xl px-6 py-32"
+    >
+      <SectionTitle
+        number="03"
+        title="Featured Projects"
+        subtitle="A selection of full-stack applications and data analytics projects that showcase production-ready development, clean architecture, and real-world problem solving."
+      />
 
-      <div className="grid gap-6 sm:grid-cols-2">
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        className="mt-14 grid gap-8 lg:grid-cols-2"
+      >
         {featured.map((project, i) => (
-          <ProjectCard key={project.id} project={project} index={i} />
+          <ProjectCard
+            key={project.id}
+            project={project}
+          />
         ))}
-      </div>
+      </motion.div>
 
       {others.length > 0 && (
         <>
-          <motion.h3
-            initial={{ opacity: 0, y: 20 }}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="mb-6 mt-16 text-xl font-bold"
+            transition={{ delay: 0.2 }}
+            className="mt-24 mb-10"
           >
-            More Projects
-          </motion.h3>
-          <div className="grid gap-6 sm:grid-cols-2">
+            <h3 className="text-2xl font-bold text-foreground">
+              More Projects
+            </h3>
+
+            <p className="mt-2 max-w-2xl text-muted-foreground">
+              Additional projects covering web development, backend
+              engineering, and data analytics.
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="grid gap-8 lg:grid-cols-2"
+          >
             {others.map((project, i) => (
               <ProjectCard
                 key={project.id}
                 project={project}
-                index={i + featured.length}
               />
             ))}
-          </div>
+          </motion.div>
         </>
       )}
     </section>
